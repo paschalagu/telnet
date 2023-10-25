@@ -8,13 +8,14 @@ router_telnet_port = 23
 username = 'AguPaschal'
 password = 'cisco123!'
 password_enable = 'class123!'
+timeout_seconds =10
 
 def ssh_to_router():
     try:
         print("Connecting via SSH...")
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_client.connect(router_ip, port=router_ssh_port, username=username, password=password)
+        ssh_client.connect(router_ip, port=router_ssh_port, username=username, password=password,timeout=timeout_seconds)
 
         # Execute a command on the router
         stdin, stdout, stderr = ssh_client.exec_command("show version")
